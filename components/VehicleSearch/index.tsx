@@ -29,9 +29,15 @@ const VehicleSearch: React.FC<VehicleSearchProps> = ({
   return (
     <form onSubmit={handleSubmit((d) => console.log(d))}>
       <Controller
-        name="select"
+        name="brand"
         control={control}
-        render={({ field }) => <Select {...field} options={brandsOptions} />}
+        render={({ field: { onChange, ref } }) => (
+          <Select
+            ref={ref}
+            onChange={(e) => console.log(e)}
+            options={brandsOptions}
+          />
+        )}
       />
       <input type="submit" />
     </form>

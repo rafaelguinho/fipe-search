@@ -1,16 +1,18 @@
 import type { NextPage } from "next";
 import VehicleSearch from "../components/VehicleSearch";
 import { VehicleSearchProps } from "../components/VehicleSearch/types";
+import { BrandsApi } from "../models/types";
+import BrandsService from "../services/brands";
 
 const Home: NextPage<VehicleSearchProps> = ({ brands }: VehicleSearchProps) => {
   return <VehicleSearch brands={brands} />;
 };
 
 export async function getStaticProps() {
-  const response = await fetch(
-    "https://parallelum.com.br/fipe/api/v1/carros/marcas"
-  );
-  const data = await response.json();
+
+  const brandsService = new BrandsService();
+
+  const data: BrandsApi[] = await brandsService.getBrands('carros');
 
   return {
     props: {
