@@ -6,8 +6,10 @@ import { Controller, useForm } from "react-hook-form";
 import Select from "react-select";
 
 const VehicleSearch: React.FC<VehicleSearchProps> = ({
-  brands,
+  vehicleType,
+  brands = [],
 }: VehicleSearchProps) => {
+  console.log(vehicleType);
   const schema = yup
     .object()
     .shape({
@@ -21,10 +23,12 @@ const VehicleSearch: React.FC<VehicleSearchProps> = ({
   });
   const { errors } = formState;
 
-  const brandsOptions: SelectOption[] = brands.map<SelectOption>((b) => ({
-    label: b.nome,
-    value: b.codigo,
-  }));
+  const brandsOptions: SelectOption[] | undefined = brands?.map<SelectOption>(
+    (b) => ({
+      label: b.nome,
+      value: b.codigo,
+    })
+  );
 
   return (
     <form onSubmit={handleSubmit((d) => console.log(d))}>
