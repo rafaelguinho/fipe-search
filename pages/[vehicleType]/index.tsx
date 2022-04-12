@@ -14,7 +14,7 @@ const VehicleType: React.FC<VehicleTypeProps> = ({
   vehicleType,
   brands = [],
 }: VehicleTypeProps) => {
-  console.log(vehicleType);
+  console.log("vehicleType", vehicleType);
 
   return <VehicleSearch vehicleType={vehicleType} brands={brands} />;
 };
@@ -29,11 +29,11 @@ export function getStaticPaths() {
 }
 
 export async function getStaticProps(context: GetStaticPropsContext) {
-  const vehicleType = context?.params?.vehicleType as string;
+  const vehicleType = context?.params?.vehicleType as string ?? VEHICLE_TYPE_DEFAULT;
 
   const brandsService = new BrandsService();
 
-  const brands: BrandsApi[] = await brandsService.getBrands(vehicleType ?? VEHICLE_TYPE_DEFAULT);
+  const brands: BrandsApi[] = await brandsService.getBrands(vehicleType);
 
   return {
     props: {

@@ -1,5 +1,5 @@
 import { BrandsApi } from "../../models/types";
-import IBrandsService from "../models/IBrandsService";
+import IBrandsService from "./IBrandsService";
 
 export default class BrandsService implements IBrandsService {
   async getBrands(vehicleType: string): Promise<BrandsApi[]> {
